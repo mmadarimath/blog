@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ✅ Include the header partial -->
+    <%- include('partials/header') %>
+
+        <title>Sign Up</title>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mt-5">
+                    <form action="/user/signup" method="POST">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" name="fullName" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" name="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- ✅ Include the script partial -->
+        <%- include('partials/script') %>
+</body>
+
+</html>
