@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/header') %>
+    <title>Sign In</title>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                <form id="signinForm">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/script') %>
+
+    <script>
+        const form = document.getElementById('signinForm');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch('/user/signin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    // Store JWT in localStorage or cookie
+                    localStorage.setItem('token', data.token);
+                    alert('Login successful! Token saved.');
+                    // Optionally redirect to a protected page
+                    window.location.href = '/';
+                } else {
+                    alert(data);
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Login failed. Check console for details.');
+            }
+        });
+    </script>
+</body>
+
+</html>

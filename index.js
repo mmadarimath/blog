@@ -11,13 +11,13 @@ mongoose.connect("mongodb://localhost:27017/blogged")
   .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
+// Routes
 app.get("/", (req, res) => res.render("home"));
-
 app.use("/user", userRoute);
 
 app.listen(PORT, () =>
